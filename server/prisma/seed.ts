@@ -1,47 +1,42 @@
 import "dotenv/config";
-import { PrismaClient } from "../src/generated/prisma/client";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL!);
+import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+});
 
 const prisma = new PrismaClient({
   adapter,
 });
 
-async function main(): Promise<void> {
-  await prisma.activity.upsert({
-    where: { name: "Water Can" },
-    update: { icon: "💧" },
-    create: {
-      name: "Water Can",
-      icon: "💧",
-    },
-  });
-
-  await prisma.activity.upsert({
-    where: { name: "Dustbin" },
-    update: { icon: "🗑️" },
-    create: {
-      name: "Dustbin",
-      icon: "🗑️",
-    },
-  });
-
-  await prisma.activity.upsert({
-    where: { name: "Cleaning" },
-    update: { icon: "🧹" },
-    create: {
-      name: "Cleaning",
-      icon: "🧹",
-    },
+async function main() {
+  await prisma.activity.createMany({
+    data: [
+      {
+        name: "Water Can",
+        icon: "💧",
+      },
+      {
+        name: "Dustbin",
+        icon: "🗑️",
+      },
+      {
+        name: "Cleaning",
+        icon: "🧹",
+      },
+    ],
+    skipDuplicates: true,
   });
 
   console.log("Activities seeded successfully.");
 }
 
 main()
-  .catch((error: unknown) => {
-    console.error("Seed failed:", error);
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();

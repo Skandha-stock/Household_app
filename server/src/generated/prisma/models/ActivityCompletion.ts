@@ -247,7 +247,6 @@ export type ActivityCompletionOrderByWithRelationInput = {
   household?: Prisma.HouseholdOrderByWithRelationInput
   activity?: Prisma.ActivityOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  _relevance?: Prisma.ActivityCompletionOrderByRelevanceInput
 }
 
 export type ActivityCompletionWhereUniqueInput = Prisma.AtLeast<{
@@ -357,12 +356,6 @@ export type ActivityCompletionListRelationFilter = {
 
 export type ActivityCompletionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ActivityCompletionOrderByRelevanceInput = {
-  fields: Prisma.ActivityCompletionOrderByRelevanceFieldEnum | Prisma.ActivityCompletionOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type ActivityCompletionHouseholdIdActivityIdDateCompoundUniqueInput = {
@@ -778,7 +771,29 @@ export type ActivityCompletionSelect<ExtArgs extends runtime.Types.Extensions.In
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["activityCompletion"]>
 
+export type ActivityCompletionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  householdId?: boolean
+  activityId?: boolean
+  userId?: boolean
+  date?: boolean
+  completedAt?: boolean
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  activity?: boolean | Prisma.ActivityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["activityCompletion"]>
 
+export type ActivityCompletionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  householdId?: boolean
+  activityId?: boolean
+  userId?: boolean
+  date?: boolean
+  completedAt?: boolean
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  activity?: boolean | Prisma.ActivityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["activityCompletion"]>
 
 export type ActivityCompletionSelectScalar = {
   id?: boolean
@@ -791,6 +806,16 @@ export type ActivityCompletionSelectScalar = {
 
 export type ActivityCompletionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "householdId" | "activityId" | "userId" | "date" | "completedAt", ExtArgs["result"]["activityCompletion"]>
 export type ActivityCompletionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  activity?: boolean | Prisma.ActivityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ActivityCompletionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  activity?: boolean | Prisma.ActivityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ActivityCompletionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
   activity?: boolean | Prisma.ActivityDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -928,6 +953,30 @@ export interface ActivityCompletionDelegate<ExtArgs extends runtime.Types.Extens
   createMany<T extends ActivityCompletionCreateManyArgs>(args?: Prisma.SelectSubset<T, ActivityCompletionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many ActivityCompletions and returns the data saved in the database.
+   * @param {ActivityCompletionCreateManyAndReturnArgs} args - Arguments to create many ActivityCompletions.
+   * @example
+   * // Create many ActivityCompletions
+   * const activityCompletion = await prisma.activityCompletion.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many ActivityCompletions and only return the `id`
+   * const activityCompletionWithIdOnly = await prisma.activityCompletion.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends ActivityCompletionCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ActivityCompletionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityCompletionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a ActivityCompletion.
    * @param {ActivityCompletionDeleteArgs} args - Arguments to delete one ActivityCompletion.
    * @example
@@ -990,6 +1039,36 @@ export interface ActivityCompletionDelegate<ExtArgs extends runtime.Types.Extens
    * 
    */
   updateMany<T extends ActivityCompletionUpdateManyArgs>(args: Prisma.SelectSubset<T, ActivityCompletionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more ActivityCompletions and returns the data updated in the database.
+   * @param {ActivityCompletionUpdateManyAndReturnArgs} args - Arguments to update many ActivityCompletions.
+   * @example
+   * // Update many ActivityCompletions
+   * const activityCompletion = await prisma.activityCompletion.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more ActivityCompletions and only return the `id`
+   * const activityCompletionWithIdOnly = await prisma.activityCompletion.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends ActivityCompletionUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ActivityCompletionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityCompletionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one ActivityCompletion.
@@ -1426,6 +1505,29 @@ export type ActivityCompletionCreateManyArgs<ExtArgs extends runtime.Types.Exten
 }
 
 /**
+ * ActivityCompletion createManyAndReturn
+ */
+export type ActivityCompletionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityCompletion
+   */
+  select?: Prisma.ActivityCompletionSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityCompletion
+   */
+  omit?: Prisma.ActivityCompletionOmit<ExtArgs> | null
+  /**
+   * The data used to create many ActivityCompletions.
+   */
+  data: Prisma.ActivityCompletionCreateManyInput | Prisma.ActivityCompletionCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityCompletionIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * ActivityCompletion update
  */
 export type ActivityCompletionUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1467,6 +1569,36 @@ export type ActivityCompletionUpdateManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many ActivityCompletions to update.
    */
   limit?: number
+}
+
+/**
+ * ActivityCompletion updateManyAndReturn
+ */
+export type ActivityCompletionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityCompletion
+   */
+  select?: Prisma.ActivityCompletionSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityCompletion
+   */
+  omit?: Prisma.ActivityCompletionOmit<ExtArgs> | null
+  /**
+   * The data used to update ActivityCompletions.
+   */
+  data: Prisma.XOR<Prisma.ActivityCompletionUpdateManyMutationInput, Prisma.ActivityCompletionUncheckedUpdateManyInput>
+  /**
+   * Filter which ActivityCompletions to update
+   */
+  where?: Prisma.ActivityCompletionWhereInput
+  /**
+   * Limit how many ActivityCompletions to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityCompletionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

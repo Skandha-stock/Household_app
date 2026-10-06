@@ -138,21 +138,12 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-export const UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  loginId: 'loginId',
-  name: 'name',
-  passwordHash: 'passwordHash'
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 } as const
 
-export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-export const HouseholdOrderByRelevanceFieldEnum = {
-  name: 'name'
-} as const
-
-export type HouseholdOrderByRelevanceFieldEnum = (typeof HouseholdOrderByRelevanceFieldEnum)[keyof typeof HouseholdOrderByRelevanceFieldEnum]
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
 export const NullsOrder = {
@@ -161,26 +152,4 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const HouseholdMemberOrderByRelevanceFieldEnum = {
-  userId: 'userId'
-} as const
-
-export type HouseholdMemberOrderByRelevanceFieldEnum = (typeof HouseholdMemberOrderByRelevanceFieldEnum)[keyof typeof HouseholdMemberOrderByRelevanceFieldEnum]
-
-
-export const ActivityOrderByRelevanceFieldEnum = {
-  name: 'name',
-  icon: 'icon'
-} as const
-
-export type ActivityOrderByRelevanceFieldEnum = (typeof ActivityOrderByRelevanceFieldEnum)[keyof typeof ActivityOrderByRelevanceFieldEnum]
-
-
-export const ActivityCompletionOrderByRelevanceFieldEnum = {
-  userId: 'userId'
-} as const
-
-export type ActivityCompletionOrderByRelevanceFieldEnum = (typeof ActivityCompletionOrderByRelevanceFieldEnum)[keyof typeof ActivityCompletionOrderByRelevanceFieldEnum]
 

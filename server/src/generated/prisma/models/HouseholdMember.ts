@@ -241,7 +241,6 @@ export type HouseholdMemberOrderByWithRelationInput = {
   leftAt?: Prisma.SortOrderInput | Prisma.SortOrder
   household?: Prisma.HouseholdOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  _relevance?: Prisma.HouseholdMemberOrderByRelevanceInput
 }
 
 export type HouseholdMemberWhereUniqueInput = Prisma.AtLeast<{
@@ -351,12 +350,6 @@ export type HouseholdMemberListRelationFilter = {
 
 export type HouseholdMemberOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type HouseholdMemberOrderByRelevanceInput = {
-  fields: Prisma.HouseholdMemberOrderByRelevanceFieldEnum | Prisma.HouseholdMemberOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type HouseholdMemberHouseholdIdUserIdCompoundUniqueInput = {
@@ -662,7 +655,27 @@ export type HouseholdMemberSelect<ExtArgs extends runtime.Types.Extensions.Inter
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["householdMember"]>
 
+export type HouseholdMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  householdId?: boolean
+  userId?: boolean
+  role?: boolean
+  joinedAt?: boolean
+  leftAt?: boolean
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["householdMember"]>
 
+export type HouseholdMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
+  householdId?: boolean
+  userId?: boolean
+  role?: boolean
+  joinedAt?: boolean
+  leftAt?: boolean
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}, ExtArgs["result"]["householdMember"]>
 
 export type HouseholdMemberSelectScalar = {
   id?: boolean
@@ -675,6 +688,14 @@ export type HouseholdMemberSelectScalar = {
 
 export type HouseholdMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "householdId" | "userId" | "role" | "joinedAt" | "leftAt", ExtArgs["result"]["householdMember"]>
 export type HouseholdMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type HouseholdMemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type HouseholdMemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -810,6 +831,30 @@ export interface HouseholdMemberDelegate<ExtArgs extends runtime.Types.Extension
   createMany<T extends HouseholdMemberCreateManyArgs>(args?: Prisma.SelectSubset<T, HouseholdMemberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
+   * Create many HouseholdMembers and returns the data saved in the database.
+   * @param {HouseholdMemberCreateManyAndReturnArgs} args - Arguments to create many HouseholdMembers.
+   * @example
+   * // Create many HouseholdMembers
+   * const householdMember = await prisma.householdMember.createManyAndReturn({
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Create many HouseholdMembers and only return the `id`
+   * const householdMemberWithIdOnly = await prisma.householdMember.createManyAndReturn({
+   *   select: { id: true },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  createManyAndReturn<T extends HouseholdMemberCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, HouseholdMemberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseholdMemberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+  /**
    * Delete a HouseholdMember.
    * @param {HouseholdMemberDeleteArgs} args - Arguments to delete one HouseholdMember.
    * @example
@@ -872,6 +917,36 @@ export interface HouseholdMemberDelegate<ExtArgs extends runtime.Types.Extension
    * 
    */
   updateMany<T extends HouseholdMemberUpdateManyArgs>(args: Prisma.SelectSubset<T, HouseholdMemberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+
+  /**
+   * Update zero or more HouseholdMembers and returns the data updated in the database.
+   * @param {HouseholdMemberUpdateManyAndReturnArgs} args - Arguments to update many HouseholdMembers.
+   * @example
+   * // Update many HouseholdMembers
+   * const householdMember = await prisma.householdMember.updateManyAndReturn({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * 
+   * // Update zero or more HouseholdMembers and only return the `id`
+   * const householdMemberWithIdOnly = await prisma.householdMember.updateManyAndReturn({
+   *   select: { id: true },
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: [
+   *     // ... provide data here
+   *   ]
+   * })
+   * Note, that providing `undefined` is treated as the value not being there.
+   * Read more here: https://pris.ly/d/null-undefined
+   * 
+   */
+  updateManyAndReturn<T extends HouseholdMemberUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, HouseholdMemberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseholdMemberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one HouseholdMember.
@@ -1307,6 +1382,29 @@ export type HouseholdMemberCreateManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * HouseholdMember createManyAndReturn
+ */
+export type HouseholdMemberCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HouseholdMember
+   */
+  select?: Prisma.HouseholdMemberSelectCreateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the HouseholdMember
+   */
+  omit?: Prisma.HouseholdMemberOmit<ExtArgs> | null
+  /**
+   * The data used to create many HouseholdMembers.
+   */
+  data: Prisma.HouseholdMemberCreateManyInput | Prisma.HouseholdMemberCreateManyInput[]
+  skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseholdMemberIncludeCreateManyAndReturn<ExtArgs> | null
+}
+
+/**
  * HouseholdMember update
  */
 export type HouseholdMemberUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1348,6 +1446,36 @@ export type HouseholdMemberUpdateManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many HouseholdMembers to update.
    */
   limit?: number
+}
+
+/**
+ * HouseholdMember updateManyAndReturn
+ */
+export type HouseholdMemberUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HouseholdMember
+   */
+  select?: Prisma.HouseholdMemberSelectUpdateManyAndReturn<ExtArgs> | null
+  /**
+   * Omit specific fields from the HouseholdMember
+   */
+  omit?: Prisma.HouseholdMemberOmit<ExtArgs> | null
+  /**
+   * The data used to update HouseholdMembers.
+   */
+  data: Prisma.XOR<Prisma.HouseholdMemberUpdateManyMutationInput, Prisma.HouseholdMemberUncheckedUpdateManyInput>
+  /**
+   * Filter which HouseholdMembers to update
+   */
+  where?: Prisma.HouseholdMemberWhereInput
+  /**
+   * Limit how many HouseholdMembers to update.
+   */
+  limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HouseholdMemberIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
