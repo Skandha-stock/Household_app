@@ -8,9 +8,9 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User.ts'
-export type * from './models/Household.ts'
-export type * from './models/HouseholdMember.ts'
-export type * from './models/Activity.ts'
-export type * from './models/ActivityCompletion.ts'
-export type * from './commonInputTypes.ts'
+export type * from './models/User.js'
+export type * from './models/Household.js'
+export type * from './models/HouseholdMember.js'
+export type * from './models/Activity.js'
+export type * from './models/ActivityCompletion.js'
+export type * from './commonInputTypes.js'
